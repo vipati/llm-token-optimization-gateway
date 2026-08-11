@@ -18,6 +18,21 @@ The strongest demo story is:
 powershell -ExecutionPolicy Bypass -File .\scripts\run-demo.ps1
 ```
 
+## Generated Recording
+
+The committed GIF demo is available at:
+
+```text
+docs/assets/token-gateway-demo.gif
+```
+
+To regenerate it:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-demo.ps1 | Tee-Object -FilePath reports\demo-output.txt
+uv run --with pillow python scripts\render-demo-gif.py
+```
+
 ## What The Demo Proves
 
 - The gateway sits between the app and the local LLM service.
@@ -62,4 +77,3 @@ A Streamlit dashboard would make a stronger visual demo later:
 - estimated cost saved
 - cache hit or miss
 - local LLM response
-

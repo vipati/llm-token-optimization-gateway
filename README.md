@@ -57,6 +57,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\run-demo.ps1
 
 Recording guidance is in [docs/demo-recording.md](docs/demo-recording.md).
 
+![Token gateway demo](docs/assets/token-gateway-demo.gif)
+
 ## API
 
 ```text
