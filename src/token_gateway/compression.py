@@ -10,9 +10,14 @@ def compress_prompt(question: str, context: str, max_context_tokens: int = 120) 
     )
     return (
         "Answer the question using only the relevant context.\n\n"
-        f"Question: {question.strip()}\n\n"
-        f"Relevant context:\n{relevant_context}"
+        f"Relevant context:\n{relevant_context}\n\n"
+        f"Question: {question.strip()}"
     ).strip()
+
+
+def build_original_prompt(question: str, context: str) -> str:
+    """The prompt an application would send without the gateway."""
+    return f"Context:\n{context}\n\nQuestion: {question.strip()}"
 
 
 def remove_duplicate_lines(text: str) -> str:
@@ -27,4 +32,3 @@ def remove_duplicate_lines(text: str) -> str:
         seen.add(normalized)
         lines.append(line.strip())
     return "\n".join(lines)
-

@@ -31,6 +31,16 @@ def load_font(size: int) -> ImageFont.ImageFont:
     return ImageFont.load_default()
 
 
+def tidy(line: str) -> str | None:
+    """Render markdown table rows from the benchmark as aligned plain text."""
+    if line.startswith("| ---") or line.startswith("| Metric |"):
+        return None
+    if line.startswith("|"):
+        name, value = [cell.strip().replace("**", "") for cell in line.strip("|").split("|")]
+        return f"  {name:<46} {value}"
+    return line.replace("`", "")
+
+
 def draw_frame(lines: list[str], frame_index: int, total_frames: int) -> Image.Image:
     image = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(image)
@@ -42,7 +52,7 @@ def draw_frame(lines: list[str], frame_index: int, total_frames: int) -> Image.I
     draw.text((PADDING, 30), "LLM Token Optimization Gateway Demo", fill=TEXT, font=title)
     draw.text(
         (PADDING, 66),
-        "Prompt compression + exact cache in front of a local LLM service",
+        "Context compression + exact and semantic caching in front of any LLM",
         fill=MUTED,
         font=small,
     )
@@ -56,9 +66,10 @@ def draw_frame(lines: list[str], frame_index: int, total_frames: int) -> Image.I
             line.startswith("Tokens")
             or line.startswith("Reduction")
             or line.startswith("Cache hit")
+            or "token reduction" in line
         ):
             color = GREEN
-        elif line.startswith("1.") or line.startswith("2.") or line.startswith("3."):
+        elif line[:2] in {"1.", "2.", "3.", "4."}:
             color = BLUE
         draw.text((PADDING, y), line, fill=color, font=font)
         y += LINE_HEIGHT
@@ -84,7 +95,8 @@ def main() -> None:
     except UnicodeDecodeError:
         raw_text = INPUT.read_text(encoding="utf-16")
     lines = raw_text.splitlines()
-    lines = [line for line in lines if line.strip()]
+    lines = [tidy(line) for line in lines if line.strip()]
+    lines = [line for line in lines if line]
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 
     frames = [draw_frame(lines, index, len(lines)) for index in range(1, len(lines) + 1)]

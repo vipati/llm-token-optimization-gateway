@@ -1,0 +1,20 @@
+# Gateway and model service as separate containers, talking over HTTP through the
+# OpenAI-compatible API. Swap TOKEN_GATEWAY_BASE_URL to point at Ollama, vLLM, or OpenAI.
+services:
+  llmapi:
+    build: .
+    command: ["uvicorn", "llmapi.api:app", "--host", "0.0.0.0", "--port", "8001"]
+    ports:
+      - "8001:8001"
+
+  gateway:
+    build: .
+    depends_on:
+      - llmapi
+    environment:
+      TOKEN_GATEWAY_BACKEND: openai
+      TOKEN_GATEWAY_BASE_URL: http://llmapi:8001/v1
+      TOKEN_GATEWAY_MODEL: tiny-local-model
+      TOKEN_GATEWAY_TOKENIZER: tiktoken
+    ports:
+      - "8000:8000"

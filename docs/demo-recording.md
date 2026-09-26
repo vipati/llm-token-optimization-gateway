@@ -11,6 +11,7 @@ The strongest demo story is:
 3. Show token reduction and cost-saving metrics.
 4. Run the same request again.
 5. Show the cache hit.
+6. Replay the benchmark workload and show the results table.
 
 ## Run The Demo
 
@@ -39,6 +40,7 @@ uv run --with pillow python scripts\render-demo-gif.py
 - The local LLM still returns a useful answer.
 - The gateway reduces tokens before model execution.
 - Repeated optimized prompts are served from cache.
+- Across a 65-request workload, token savings, cache hit rates, and overhead are measured.
 - Token savings are measured instead of assumed.
 
 ## Best Recording Options
@@ -66,14 +68,3 @@ Then I run a completion through the gateway.
 The gateway removes duplicate lines, keeps relevant context, and reports token savings.
 Finally, I run the same request again to show the exact cache hit.
 ```
-
-## Future Visual Demo
-
-A Streamlit dashboard would make a stronger visual demo later:
-
-- before and after prompt
-- tokens before and after
-- reduction percentage
-- estimated cost saved
-- cache hit or miss
-- local LLM response

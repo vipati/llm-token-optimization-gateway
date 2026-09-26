@@ -1,0 +1,103 @@
+{
+  "description": "Synthetic customer-support knowledge base. Each context mimics a RAG prompt stuffed with a system preamble, repeated boilerplate, and unrelated sections. Each question has a gold fact that must survive compression, plus paraphrases a real user might send.",
+  "contexts": [
+    {
+      "id": "account",
+      "text": "You are a helpful support assistant for Acme Cloud, an internal SaaS product.\nCompany boilerplate: Always be polite. Always be clear. Always be concise.\nCompany boilerplate: Always be polite. Always be clear. Always be concise.\nCompany boilerplate: Always be polite. Always be clear. Always be concise.\n\nPassword reset policy:\nUsers can reset a password from the account login page by clicking Forgot Password.\nThe reset link expires after 30 minutes.\nAdministrators cannot view user passwords.\nAfter five failed sign-in attempts the account is locked for 15 minutes.\n\nTwo-factor authentication:\nTwo-factor authentication can be enabled under Settings, then Security.\nSupported second factors are authenticator apps and hardware security keys.\nSMS codes are not supported for security reasons.\n\nAccount deletion:\nAccount owners can delete a workspace from Settings, then Danger Zone.\nDeleted workspaces are recoverable for 14 days before permanent removal.\n\nUnrelated release notes:\nThe dashboard color palette changed last quarter.\nThe marketing page headline was updated.\nThe mobile app icon now uses a darker shade of blue.\nOur annual conference will be held in Lisbon this year.",
+      "questions": [
+        {
+          "question": "How do I reset my password?",
+          "gold": "clicking Forgot Password",
+          "paraphrases": ["How can I reset my password?", "how do i reset my password"]
+        },
+        {
+          "question": "How long is the password reset link valid?",
+          "gold": "expires after 30 minutes",
+          "paraphrases": ["How long is the password reset link valid for?"]
+        },
+        {
+          "question": "Which second factors are supported for two-factor authentication?",
+          "gold": "authenticator apps and hardware security keys",
+          "paraphrases": ["Which second factors does two-factor authentication support?"]
+        },
+        {
+          "question": "What happens after five failed sign-in attempts?",
+          "gold": "locked for 15 minutes",
+          "paraphrases": ["What happens after five failed sign in attempts?"]
+        },
+        {
+          "question": "Can a deleted workspace be recovered?",
+          "gold": "recoverable for 14 days",
+          "paraphrases": ["Can I recover a deleted workspace?"]
+        }
+      ]
+    },
+    {
+      "id": "billing",
+      "text": "You are a helpful billing assistant for Acme Cloud.\nCompany boilerplate: Always be polite. Always be clear. Always be concise.\nCompany boilerplate: Always be polite. Always be clear. Always be concise.\nNever share internal pricing spreadsheets with customers.\nNever share internal pricing spreadsheets with customers.\n\nInvoices:\nInvoices are generated on the first day of each month.\nInvoices can be downloaded as PDF from Billing, then History.\nThe billing contact receives invoices by email.\n\nRefunds:\nRefund requests must include the invoice number.\nRefunds are processed within 10 business days.\nAnnual plans can be refunded on a prorated basis within the first 30 days.\n\nPlan changes:\nUpgrades take effect immediately and are prorated for the current cycle.\nDowngrades take effect at the start of the next billing cycle.\nThe Starter plan includes up to 5 seats.\nThe Business plan includes single sign-on and audit logs.\n\nPayment methods:\nWe accept Visa, Mastercard, and American Express.\nEnterprise customers can pay by bank transfer with net 30 terms.\n\nUnrelated release notes:\nThe dashboard color palette changed last quarter.\nOur support team added two new members in the Berlin office.\nThe status page moved to a new domain.",
+      "questions": [
+        {
+          "question": "When are invoices generated?",
+          "gold": "first day of each month",
+          "paraphrases": ["When do invoices get generated?"]
+        },
+        {
+          "question": "What do refund requests need to include?",
+          "gold": "include the invoice number",
+          "paraphrases": ["What must refund requests include?"]
+        },
+        {
+          "question": "How long do refunds take to be processed?",
+          "gold": "within 10 business days",
+          "paraphrases": ["How long does it take for refunds to be processed?"]
+        },
+        {
+          "question": "When do plan downgrades take effect?",
+          "gold": "start of the next billing cycle",
+          "paraphrases": ["When does a plan downgrade take effect?"]
+        },
+        {
+          "question": "Which plan includes single sign-on?",
+          "gold": "Business plan includes single sign-on",
+          "paraphrases": ["What plan includes single sign-on?"]
+        },
+        {
+          "question": "Can enterprise customers pay by bank transfer?",
+          "gold": "bank transfer with net 30 terms",
+          "paraphrases": ["Can enterprise customers pay using bank transfer?"]
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "text": "You are a developer support assistant for the Acme Cloud public API.\nCompany boilerplate: Always be polite. Always be clear. Always be concise.\nCompany boilerplate: Always be polite. Always be clear. Always be concise.\nAlways include code samples when relevant.\nAlways include code samples when relevant.\n\nAuthentication:\nAPI requests are authenticated with a bearer token in the Authorization header.\nAPI tokens can be created under Settings, then Developer.\nTokens do not expire but can be revoked at any time.\n\nRate limits:\nThe API allows 600 requests per minute per token.\nRequests over the limit receive HTTP 429 with a Retry-After header.\nBulk endpoints count as ten requests each.\n\nPagination:\nList endpoints return 100 items per page by default.\nUse the cursor field from the response to fetch the next page.\n\nWebhooks:\nWebhook deliveries are retried up to 8 times with exponential backoff.\nEach webhook request is signed with an HMAC SHA-256 signature header.\n\nUnrelated release notes:\nThe dashboard color palette changed last quarter.\nThe documentation site switched to a new search provider.\nThe community forum now supports dark mode.",
+      "questions": [
+        {
+          "question": "What is the API rate limit?",
+          "gold": "600 requests per minute",
+          "paraphrases": ["What is the rate limit for the API?"]
+        },
+        {
+          "question": "What happens when requests go over the rate limit?",
+          "gold": "HTTP 429 with a Retry-After header",
+          "paraphrases": ["What happens when requests are over the rate limit?"]
+        },
+        {
+          "question": "How are API requests authenticated?",
+          "gold": "bearer token in the Authorization header",
+          "paraphrases": ["How do API requests get authenticated?"]
+        },
+        {
+          "question": "How many times are webhook deliveries retried?",
+          "gold": "retried up to 8 times",
+          "paraphrases": ["How many times is a webhook delivery retried?"]
+        },
+        {
+          "question": "How do I fetch the next page from a list endpoint?",
+          "gold": "cursor field",
+          "paraphrases": ["How can I fetch the next page of a list endpoint?"]
+        }
+      ]
+    }
+  ]
+}

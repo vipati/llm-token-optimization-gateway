@@ -6,4 +6,3 @@ def reduction_percentage(before: int, after: int) -> float:
     if before <= 0:
         return 0.0
     return round(((before - after) / before) * 100, 2)
-
